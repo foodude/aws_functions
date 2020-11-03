@@ -124,5 +124,4 @@ def bucket_info(**args):
 
     except Exception as err:
         log.error(err)
-        
         return False
