@@ -24,7 +24,7 @@ def list_groups(**args):
 
     try:
        iam = session.resource('iam')
-       return [x.name for x in iam_resource.groups.all()]
+       return [x.name for x in iam.groups.all()]
 
     except Exception as err:
         log.error({'args': args, 
