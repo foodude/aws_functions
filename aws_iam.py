@@ -7,7 +7,7 @@ log.getLogger().addHandler(log.NullHandler())
 
 
 def list_users(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
 
     try:
        iam = session.resource('iam')
@@ -20,7 +20,7 @@ def list_users(**args):
 
 
 def list_groups(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
 
     try:
        iam = session.resource('iam')
@@ -33,7 +33,7 @@ def list_groups(**args):
 
 
 def create_user(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     user_name = args.get('user_name')
 
     try:
@@ -48,7 +48,7 @@ def create_user(**args):
 
 
 def list_user_access_keys(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     user_name = args.get('user_name')
 
     try:
@@ -63,7 +63,7 @@ def list_user_access_keys(**args):
 
 
 def create_user_access_key(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     user_name = args.get('user_name')
 
     try:

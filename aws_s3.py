@@ -6,7 +6,7 @@ from aws_session import create_session
 
 
 def list_buckets(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
 
     try:
         s3 = session.resource('s3')
@@ -18,7 +18,7 @@ def list_buckets(**args):
 
 
 def create_bucket(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     bucket_prefix = args.get('bucket_prefix', str(uuid.uuid4()))
     bucket_name = args.get('bucket_name', 'unnamed')
 
@@ -41,7 +41,7 @@ def create_bucket(**args):
 
 
 def delete_bucket(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     bucket_name = args.get('bucket_name')
 
     try:
@@ -56,7 +56,7 @@ def delete_bucket(**args):
 
 
 def list_files(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     bucket_name = args.get('bucket_name')
     profile_name = args.get('profile_name', 'default')
 
@@ -72,7 +72,7 @@ def list_files(**args):
 
 
 def upload_file(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     file_name = args.get('file_name')
     bucket_name = args.get('bucket_name')
 
@@ -90,7 +90,7 @@ def upload_file(**args):
 
 
 def dowload_file(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     bucket_name = args.get('bucket_name')
     file_name = args.get('file_name')
     destination = args.get('destination', file_name)
@@ -107,7 +107,7 @@ def dowload_file(**args):
 
 
 def bucket_info(**args):
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     bucket_name = args.get('bucket_name')
 
     try:

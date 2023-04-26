@@ -19,7 +19,7 @@ def list_queues(**args):
         list | False
     """
     
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     sort_by = args.get('sort_by', 'url')
     sqs = session.resource('sqs')
 
@@ -49,7 +49,7 @@ def create_queue(**args):
         queue_url | False
     """
     
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     queue_name = args.get('queue_name', None)
     attributes = args.get('attributes', {})
     sqs = session.resource('sqs')
@@ -85,7 +85,7 @@ def delete_queu(**args):
         True | False
     """
     
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     queue_url = args.get('queue_url', None)
     queue_name = args.get('queue_name', None)
     sqs = session.client('sqs')
@@ -122,7 +122,7 @@ def get_queue_url(**args):
         url | False
     """
     
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     queue_name = args.get('queue_name', None)
 
     if not queue_name:
@@ -156,7 +156,7 @@ def send_message(**args):
         True | False
     """
 
-    session = args.get('session', create_session())
+    session = args.get('session') or create_session()
     queue_name = args.get('queue_name', None)
     body = args.get('body', None)
     attributes = args.get('attributes', {})
@@ -182,24 +182,4 @@ def send_message(**args):
     except Exception as err:
         log.error(err)
         return False
-
-
-def mp_send_message(**args):
-    """
-    info:
-        send message to multible aws sqs queues
-
-    args:
-        [session]     <session.obj>
-        [queue_names] <[name1, name2, ...]>
-        [body]        <message_body>
-        [attributes]  <{}>
-        [processes]   <0-n> (default 10)
-
-    return:
-        dict@{'name1': True, 'name2': False, ...} | False
-    """
-
-    return False
-
 
